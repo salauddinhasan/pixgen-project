@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import "./globals.css";
-import Banner from "@/components/Banner";
+ 
 import Footer from "@/components/Footer";
 import { Outfit } from "next/font/google";
 
@@ -17,8 +17,8 @@ export default function RootLayout({ children }) {
         style={{ fontFamily: "var(--font-outfit)" }}
       >
         <Navbar />
-        <Banner />
-        <main>{children}</main>
+        
+        <main className="container mx-auto p-2">{children}</main>
         <Footer />
       </body>
     </html>

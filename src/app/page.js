@@ -1,7 +1,11 @@
+import Banner from "@/components/Banner";
+import TopGenerations from "@/components/TopGenerations";
+
 export default function Home() {
   return (
     <div>
-      <h2 className="text-3xl text-center">Home Page</h2>
+       <Banner/>
+       <TopGenerations/>
     </div>
   );
 }
