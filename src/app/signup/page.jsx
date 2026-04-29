@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 
 export default function SignUpPage() {
   const router = useRouter();
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -28,20 +29,17 @@ export default function SignUpPage() {
       email,
       password,
       image,
-       
     });
-    if (data) {
-      alert("Account created successfully!");
-      router.push('/');
-    }
-    if (error) {
-      alert(`Sign up failed: ${error.message}`);
-      return;
+
+    console.log({ data, error });
+
+    if (!error) {
+      router.push("/");
     }
   };
 
   return (
-    <Card className="border mx-auto max-w-md py-10 mt-5">
+    <Card className="border mx-auto w-125 py-10 mt-5">
       <h1 className="text-center text-2xl font-bold">Sign Up</h1>
 
       <Form className="flex w-96 mx-auto flex-col gap-4" onSubmit={onSubmit}>

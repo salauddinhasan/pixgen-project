@@ -1,35 +1,48 @@
+import Category from "@/components/Category";
 import PhotoCard from "@/components/PhotoCard";
-import React from "react";
 
-const AllPhotoPage = async () => {
-  const res = await fetch("https://pixgen-project-seven.vercel.app/data.json", {
-    cache: "no-store",
+const AllPhotosPage = async ({ searchParams }) => {
+  const params = await searchParams;
+  const category = params.category;
+
+  const res = await fetch("https://pixgen-eta.vercel.app/data.json", {
+    next: { revalidate: 3600 },
   });
-
   const photos = await res.json();
 
+  const filteredPhotos = category
+    ? photos.filter(
+        (photo) => photo.category.toLowerCase() === category.toLowerCase(),
+      )
+    : photos;
+
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
-      {/* Header */}
-      <div className="text-center mb-12 space-y-3">
-        <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-          All Photos
-        </h2>
+    <div className="container mx-auto px-4">
+      <div className="py-10 space-y-3">
+        <h1 className="text-3xl font-bold my-6 text-center lg:text-left">
+        {category ? `Category: ${category}` : "All Photos"}
+      </h1>
 
-        <p className="text-gray-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
-          Explore thousands of AI-generated creative images and get inspired by
-          unique prompts
-        </p>
+      <div className="mb-8">
+        <Category />
       </div>
 
-      {/* Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {photos.map((photo) => (
-          <PhotoCard key={photo.id} photo={photo} />
-        ))}
       </div>
+      {filteredPhotos.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {filteredPhotos.map((photo) => (
+            <PhotoCard key={photo.id} photo={photo} />
+          ))}
+        </div>
+      ) : (
+        <div className="text-center py-20">
+          <p className="text-gray-500 text-xl">
+            No photos found in this category.
+          </p>
+        </div>
+      )}
     </div>
   );
 };
 
-export default AllPhotoPage;
+export default AllPhotosPage;
