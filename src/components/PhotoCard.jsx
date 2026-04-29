@@ -1,5 +1,6 @@
 import { Chip } from "@heroui/react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { FaHeart } from "react-icons/fa";
 import { LuDownload } from "react-icons/lu";
@@ -40,9 +41,11 @@ const PhotoCard = ({ photo }) => {
             <p>{photo.downloads || 0}</p>
           </div>
         </div>
+        <Link href={`/all-photos/${photo.id}`}>
         <button className="w-full py-2 rounded-full border border-gray-300 text-sm font-medium hover:bg-gray-800 hover:text-white transition-all">
           View
         </button>
+        </Link>
       </div>
     </div>
   );
