@@ -8,6 +8,7 @@ import { LuDownload } from "react-icons/lu";
 const PhotoCard = ({ photo }) => {
   return (
     <div className="group rounded-xl overflow-hidden border bg-white shadow-sm hover:shadow-md transition-all duration-300">
+      
       {/* Image */}
       <div className="relative w-full aspect-square overflow-hidden">
         <Image
